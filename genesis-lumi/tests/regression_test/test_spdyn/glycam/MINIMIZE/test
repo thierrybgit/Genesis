@@ -1,0 +1,252 @@
+****************************************************
+*                                                  *
+*                  GENESIS SPDYN                   *
+*                                                  *
+*        A Molecular Dynamics Simulator with       *
+*           Spatial Decomposition Scheme           *
+*                                                  *
+*               Developed by RIKEN                 *
+*                                                  *
+****************************************************
+ 
+[STEP0] Architecture and Compiler Information
+ 
+GENESIS_Information> GENESIS Information
+  version      =  1
+  commit ID    =  1
+  precision    = single
+  nonbonding   = GPU
+
+Build_Information> Compiler Information
+  build host   =  1 @ 1
+  fortran      =  1
+  option       =  1
+  C            =  1
+  option       =  1
+  defined var. =  1
+  link option  =  1
+  MPI Compiler =  1  MPI
+  HIP          =  1
+
+Runtime_Information> Machine and Library Information
+  date       = 2024/01/17 11:07:45
+  cpu model    = AMD EPYC 7A53 64-Core Processor
+  # of GPUs    =    8
+  gpu model    =  (CC 9.0)
+  gpu ECC      =  F
+  exec. host   = bracconi@nid005108
+  LD library   = /pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/deps:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/hip/lib:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/hsa/lib:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/llvm/lib:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/lib:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/lib64:/pfs/lustrep2/projappl/project_462000125/samantao-public/rocm/rocm-5.6.1/llvm:/opt/cray/pe/papi/7.0.1.1/lib64:/opt/cray/libfabric/1.15.2.0/lib64
+ MPI Runtime = MPI VERSION    : CRAY MPICH version 8.1.27.26 (ANL base 3.4a2)
+MPI BUILD INFO : Thu Aug 10 23:55 2023 (git hash 55e934a)
+
+
+[STEP1] Read Control Parameters
+ 
+Read_Ctrl_Input> Input Files
+  prmtopfile = ../../../build//glycam/glycam.top
+  ambcrdfile = ../../../build//glycam/glycam.rst
+  selfile = 
+  rstfile = ../../../build//glycam/rst
+ 
+Read_Ctrl_Output> Output Files
+ 
+Read_Ctrl_Energy> Parameters of Energy Calculations
+  forcefield      =           AMBER
+  switchdist      =          12.000
+  cutoffdist      =          12.000
+  pairlistdist    =          14.000
+  dielec_const    =           1.000
+  VDW type        =          CUTOFF
+  electrostatic   =             PME
+  pme_ngrid(x,y,z)=    64   64   64
+  pme_nspline     =               4
+  pme_alpha       =         0.34000
+  pme_scheme      =      AUTOSELECT
+  nonbond_kernel  =      AUTOSELECT
+  table_order     =               1
+  table_density   =          20.000
+  output_style    =         GENESIS
+  dispersion_corr =          epress
+  nonb_limiter    =              no
+  contact_check   =              no
+  efield_x        =           0.000
+  efield_y        =           0.000
+  efield_z        =           0.000
+  efield_normal   =              no
+  efield_virial   =              no
+  vacuum          =              no
+ 
+Read_Ctrl_Minimize> Parameters of MIN
+  method          =         SD  nsteps          =         20
+  eneout_period   =          2  crdout_period   =          0
+  rstout_period   =          0  nbupdate_period =          4
+  force_scale_init=      0.000  force_scale_max =      0.000
+  verbose         =         no
+  check_structure            =        yes  fix_ring_error             =         no
+  fix_chirality_error        =         no
+ 
+Read_Ctrl_Constraints> Parameters for Constraints
+  rigid_bond      =         no
+ 
+Read_Ctrl_Boundary> Parameters of Boundary Condition
+  type            =        PBC
+  box_size(x,y,z) =     69.529    68.060    56.226
+ 
+Read_Ctrl_Selection> Parameters of Selection
+  # of groups     =          0
+  # of mole names =          0
+ 
+Read_Ctrl_Restraints> No restraint in the system
+
+Read_Ctrl_Fitting_MD> Parameters of Fitting
+  fitting method  =  TR+ROT   
+  fitting atom    = group1
+  mass_weight     =         no
+ 
+[STEP2] Setup MPI
+ 
+Setup_Mpi_Md> Summary of Setup MPI
+  number of MPI processes   =          8
+  number of OpenMP threads  =          1
+  total number of CPU cores =          8
+
+[STEP3] Set Relevant Variables and Structures
+ 
+Read_Prmtop> Summary of PRMTOP file
+  NATOM           =      20352  NTYPES          =         20
+  NBONH           =      19336  MBONA           =       1037
+  NTHETH          =       2183  MTHETA          =       1412
+  NPHIH           =       4368  MPHIA           =       3514
+  NPARM           =          0  NNB             =      35414
+  NRES            =       6258  NBONA           =       1037
+  NTHETA          =       1412  NPHIA           =       3514
+  NUMBND          =         47  NUMANG          =         95
+  NPTRA           =         73  NATYP           =         33
+  NPHB            =          1
+  NCMAP           =          0  NCMAPTYPE       =          0
+ 
+Read_Rst_Binary> Summary of RST file
+  num_atoms       =      20352  iseed           = 2012005646
+  boxsize (x,y,z) =     69.529    68.060    56.226
+
+Define_Molecule> Summary of molecules
+  num_atoms       =      20352  num_bonds       =      20373
+  num_angles      =       3595  num_dihedrals   =       7501
+  num_impropers   =        381  num_cmap_terms  =          0
+  num_residues    =       6258  num_molecules   =       6130
+  num_segments    =          1  num_deg_freedom =      61056
+  total_charge    =     -0.000
+ 
+Setup_Restart_Pre> Coordinates and velocities were replaced
+
+Setup_Structure_Check> Setup for checking the ring size and chirality errors of proteins and DNA/RNA
+  num_ring_grps   =         17  num_chiral_grps =        133
+ 
+Setup_Boundary_Cell> Set Variables for Boundary Condition
+  domains (x,y,z) =          2         2         2
+  ncells (x,y,z)  =          8         8         6
+ 
+Select_kernel> 
+  Pairlist        = GPU         
+  Nonbond         = GPU         
+
+Setup_Enefunc_Cmap> Natural spline is used to derive cmap coefs.
+
+Define_Enefunc_Amber> Number of Interactions in Each Term
+  bond_ene        =      20373  angle_ene       =       9720
+  torsion_ene     =       7501  improper_ene    =        381
+  cmap_ene        =          0
+ restraint_groups =          0 restraint_funcs  =          0
+ 
+Setup_Fitting_Spdyn> NO fitting is applied, skip
+  fitting method  =  NO
+ 
+Select_FFT_Scheme> Checking performance of long range interaction operation...
+
+  OPT_1DALLTOALL   :      146.766 (ms)
+  NOOPT-1DALLTOALL :      144.717 (ms)
+  OPT-2DALLTOALL   :      105.735 (ms)
+  NOOPT-2DALLTOALL :      137.613 (ms)
+
+Select_FFT_Scheme> selected scheme is OPT_2DALLTOALL
+[STEP4] Compute Single Point Energy for Molecules
+ 
+            STEP            BOND           ANGLE        DIHEDRAL        IMPROPER         VDWAALS   DISP-CORR_ENE           ELECT
+ --------------- --------------- --------------- --------------- ---------------
+               0        113.7527        401.1716       1167.4138         22.4424      15927.1565       -145.6926     -89162.2063
+
+[STEP5] Perform Energy Minimization
+ 
+INFO:       STEP   POTENTIAL_ENE            RMSG            BOND           ANGLE        DIHEDRAL        IMPROPER         VDWAALS   DISP-CORR_ENE           ELECT
+ --------------- --------------- --------------- --------------- ---------------
+INFO:          0     -71530.2692         15.8018        113.7527        401.1716       1167.4138         22.4424      15927.1565       -145.6926     -89162.2063
+
+INFO:          2     -71635.6501         15.5991        113.5540        400.4225       1167.3878         22.3991      15923.9074       -145.6926     -89263.3209
+
+INFO:          4     -71785.1377         15.3106        115.7405        399.3487       1167.3502         22.3363      15919.2416       -145.6926     -89409.1551
+
+INFO:          6     -71969.9076         14.9527        122.5803        398.0001       1167.3023         22.2566      15913.3740       -145.6926     -89593.4209
+
+INFO:          8     -72150.3431         14.6020        133.8429        396.6588       1167.2539         22.1765      15907.5312       -145.6926     -89777.8064
+
+INFO:         10     -72326.5577         14.2587        149.3868        395.3254       1167.2048         22.0958      15901.7171       -145.6926     -89962.2877
+
+INFO:         12     -72498.6104         13.9227        169.0660        393.9989       1167.1553         22.0146      15895.9393       -145.6926     -90146.7845
+
+INFO:         14     -72666.6014         13.5940        192.7335        392.6799       1167.1051         21.9329      15890.1945       -145.6926     -90331.2473
+
+INFO:         16     -72830.6281         13.2728        220.2373        391.3682       1167.0543         21.8508      15884.4867       -145.6926     -90515.6253
+
+INFO:         18     -72990.7761         12.9589        251.4262        390.0636       1167.0030         21.7681      15878.8219       -145.6926     -90699.8590
+
+INFO:         20     -73147.1468         12.6524        286.1482        388.7665       1166.9511         21.6851      15873.1983       -145.6926     -90883.8961
+
+Check_Ring_Structure> Check ring structure
+ 
+  No suspicious residue was detected.
+ 
+Check_Chirality> Check chirality
+ 
+  No suspicious residue was detected.
+ 
+ 
+[STEP6] Deallocate Arrays
+ 
+Output_Time> Averaged timer profile (Min, Max)
+  total time      =       2.024
+    setup         =       1.943
+    dynamics      =       0.080
+      energy      =       0.042
+      integrator  =       0.000
+      pairlist    =       0.445 (       0.371,       0.518)
+  energy           
+    bond          =       0.001 (       0.001,       0.001)
+    angle         =       0.001 (       0.000,       0.001)
+    dihedral      =       0.002 (       0.001,       0.003)
+    base stacking =       0.000 (       0.000,       0.000)
+    nonbond       =       0.038 (       0.035,       0.040)
+      CG exv      =       0.000 (       0.000,       0.000)
+      CG DNA bp   =       0.000 (       0.000,       0.000)
+      CG DNA exv  =       0.000 (       0.000,       0.000)
+      CG ele      =       0.000 (       0.000,       0.000)
+      CG PWMcos   =       0.000 (       0.000,       0.000)
+      CG PWMcosns =       0.000 (       0.000,       0.000)
+      CG IDR-HPS  =       0.000 (       0.000,       0.000)
+      CG IDR-KH   =       0.000 (       0.000,       0.000)
+      CG KH       =       0.000 (       0.000,       0.000)
+      Contact     =       0.000 (       0.000,       0.000)
+      pme real    =       0.038 (       0.035,       0.040)
+      pme recip   =       0.027 (       0.027,       0.028)
+    solvation     =       0.000 (       0.000,       0.000)
+      polar       =       0.000 (       0.000,       0.000)
+      non-polar   =       0.000 (       0.000,       0.000)
+    restraint     =       0.000 (       0.000,       0.000)
+    qmmm          =       0.000 (       0.000,       0.000)
+    morph         =       0.000 (       0.000,       0.000)
+  integrator       
+    constraint    =       0.000 (       0.000,       0.000)
+    update        =       0.008 (       0.008,       0.009)
+    comm_coord    =       0.000 (       0.000,       0.000)
+    comm_force    =       0.000 (       0.000,       0.000)
+    comm_migrate  =       0.001 (       0.000,       0.001)
+
